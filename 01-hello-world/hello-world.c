@@ -12,7 +12,6 @@ int main() {
     printf("Hello World!");
 
     PRINT_NEW_LINE;
-    PRINT_NEW_LINE;
 
     return 0;
 }
