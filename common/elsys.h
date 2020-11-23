@@ -1,17 +1,12 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 // ELSYS
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// This is a sample programme written in C programming langueage.
+// This header contains common definitions for the ELSYS programmes.
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+#ifndef _ELSYS_H_
+#define _ELSYS_H_
 
 #define PRINT_NEW_LINE printf("\n")
 
-#include <stdio.h>
-
-int main() {
-    printf("Hello World!");
-
-    PRINT_NEW_LINE;
-
-    return 0;
-}
+#endif
