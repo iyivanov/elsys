@@ -1,7 +1,7 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 // ELSYS
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Quadratic function in C programming language
+// Solutions for lecture 1
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 #include <stdio.h>
