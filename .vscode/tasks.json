@@ -7,8 +7,11 @@
             "args": [
                 "-g",
                 "${file}",
+                "-Wall",
+                "--pedantic",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.exe"
+                "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "-lm"
             ],
             "options": {
                 "cwd": "/usr/bin"
