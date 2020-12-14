@@ -4,6 +4,9 @@
 // This header contains common definitions for the ELSYS programmes.
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
+#include <stdio.h>
+#include <strings.h>
+
 #ifndef _ELSYS_H_
 #define _ELSYS_H_
 
