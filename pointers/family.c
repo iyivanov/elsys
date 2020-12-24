@@ -1,7 +1,7 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 // ELSYS
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Pointers cheat sheet in C programming language
+// Family structure in C programming language
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 #include <stdio.h>
