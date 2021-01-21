@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
 
     char* line = NULL;
 
-    scanf("%*[^\n]%*c");
+    scanf("%*[^\n]*%c", line);
 
     printf("\nline: %s\n", line);
 
