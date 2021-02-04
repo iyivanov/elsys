@@ -1,0 +1,7 @@
+Ivan Dimitrov,10,5.27
+Ivo Ivanov,10,4.38
+Ralica Vasileva,10,6.0
+Vasil Popov,10,5.85
+Iva Rangelova,10,5.98
+Ivaylo Georgiev,10,5.63
+

@@ -2,7 +2,7 @@
 // ELSYS
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Za Uchenicite
-// Avtor: 
+// Avtor:
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 #include <stdio.h>
@@ -12,7 +12,7 @@
 
 #define NUM_OF_STUDENTS 6
 
-const char* names[] = 
+const char* names[] =
 {
     "Ivan Dimitrov",
     "Ivo Ivanov",
@@ -22,7 +22,7 @@ const char* names[] =
     "Ivaylo Georgiev"
 };
 
-float avg_marks[] = 
+float avg_marks[] =
 {
     5.27, 4.38, 6.0, 5.85, 5.98, 5.63
 };
@@ -35,7 +35,7 @@ enum boolean_e
 } boolean;
 
 // tip uchenik
-struct student_t 
+struct student_t
 {
     char* names;
     int grade;
@@ -45,7 +45,7 @@ typedef struct student_t* student_p;
 
 // spisak ot uchenicite v klasa
 typedef struct node_t * node_p;
-struct node_t 
+struct node_t
 {
     student_p student;
     node_p next;
@@ -53,7 +53,7 @@ struct node_t
 
 // tip klas
 typedef
-struct group_t 
+struct group_t
 {
     char* name;
     node_p students;
@@ -76,15 +76,15 @@ student_p create_student(const char* names, int grade, float avg_marks)
 // dobavq uchenik kam dadeniq klas
 void insert(klas_p klas, student_p student)
 {
-    if (klas != NULL) 
+    if (klas != NULL)
     {
         node_p new_student = (node_p) malloc(sizeof(struct node_t));
         new_student->student = student;
-        if (klas->students == NULL) 
+        if (klas->students == NULL)
         {
             klas->students = new_student;
-        } 
-        else 
+        }
+        else
         {
             node_p current = klas->students;
             while (current->next != NULL)
@@ -107,6 +107,7 @@ void dismiss(klas_p klas)
         {
             node_p to_free = current;
             current = current->next;
+            free(to_free->student->names);
             free(to_free->student);
             free(to_free);
         }
@@ -117,16 +118,16 @@ void dismiss(klas_p klas)
 // prints the student(s)
 void print_students(node_p node)
 {
-    while (node != NULL) 
+    while (node != NULL)
     {
         if (node->student != NULL)
         {
-            printf("name: %s; grade: %d; avg marks: %0.2f\n", 
-                node->student->names, 
-                node->student->grade, 
+            printf("name: %s; grade: %d; avg marks: %0.2f\n",
+                node->student->names,
+                node->student->grade,
                 node->student->avg_marks);
         }
-        else 
+        else
         {
             printf("no student\n");
         }
@@ -156,6 +157,55 @@ node_p find_students(klas_p klas, char* name, boolean sorted)
 
     if (klas != NULL && name != NULL)
     {
+        node_p klas_current = klas->students;
+        while(klas_current!=NULL)
+        {
+            if(strstr(klas_current->student->names, name)!= NULL)
+            {
+                node_p found = (node_p) malloc(sizeof(struct node_t));
+                found->student = klas_current->student;
+                if(found_students == NULL)
+                {
+                    found_students = found;
+                }
+                else if (! sorted)
+                {
+                    found->next = found_students;
+                    found_students = found;
+                }
+                else
+                {
+                    node_p current = found_students;
+                    while(current != NULL)
+                    {
+                        if(current->student->avg_marks < found->student->avg_marks)
+                        {
+                            student_p tmp;
+                            found->next = current->next;
+                            current->next = found;
+                            tmp = current->student;
+                            current->student = found->student;
+                            found->student = tmp;
+                            break;
+                        }
+                        current = current->next;
+                 
+                    }
+                    if(current == NULL)
+                    {
+                        current = found_students;
+                        while(current->next != NULL)
+                        {
+                            current = current->next;
+                        }
+                        current->next = found;
+                        found->next = NULL;
+                    }
+                }
+               
+            }
+            klas_current = klas_current->next;
+        }
 
     }
 
@@ -163,7 +213,7 @@ node_p find_students(klas_p klas, char* name, boolean sorted)
 }
 
 // MAIN ENTRY POINT
-int main() 
+int main()
 {
     struct group_t klas10A;
     klas10A.name = "10A";
@@ -176,7 +226,7 @@ int main()
 
     print_klas(&klas10A);
 
-    node_p found_students = find_students(&klas10A, "Iva", true);
+    node_p found_students = find_students(&klas10A, "Iva", false);
 
     printf("Searching for students with names containing 'Iva'\n");
     if (found_students != NULL)
