@@ -1,0 +1,1 @@
+void bts_hello();
