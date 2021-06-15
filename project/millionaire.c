@@ -277,6 +277,8 @@ void start_game()
                 printf("4. %s\n", questions[i].d);
             }
 
+            printf("--- === jokers ===---\n");
+
             if (jokeri.fifty_fifty == 0)
             {
                 printf("5. joker - 50/50\n");
@@ -295,10 +297,10 @@ void start_game()
             if (ans == 5)
             {
                 //izpolzvame 50/50 joker
-                for(i = 0; i < 2; i++)
+                for(int k = 0; k < 2; k++)
                 {
                     int h = rand()%4+1;
-                    while(h == questions[i].answer && answers[h] == 1)
+                    while(h == questions[i].answer || answers[h] == 1)
                     {
                         h = rand()%4+1;
                     }
@@ -310,6 +312,25 @@ void start_game()
             {
                 //izpolzvame telephone joker
                 jokeri.telephone = 1;
+                int answers[4] = {1,2,3,4};
+                int freqs[4] = {1,1,1,1};
+                switch (questions[i].difficulty)
+                {
+                    case 0:
+                        freqs[0] = freqs[1] = freqs[2] = freqs[3] = 1;
+                        freqs[questions[i].answer-1] = 8;
+                        break;
+                    case 1:
+                        freqs[0] = freqs[1] = freqs[2] = freqs[3] = 2;
+                        freqs[questions[i].answer-1] = 6;
+                        break;
+                    case 2:
+                        freqs[0] = freqs[1] = freqs[2] = freqs[3] = 3;
+                        freqs[questions[i].answer-1] = 3;
+                        break;
+                }
+                int hint = rand_prob(answers, freqs, 4);
+                printf("\nTelephone hint is %d\n\n", hint);
             }
             if (ans == 7)
             {
